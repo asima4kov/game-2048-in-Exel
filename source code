@@ -140,7 +140,7 @@ Sub NewNaber(a As Variant, b As Variant, nabr As Variant)
 End Sub
 
 Function proverkaVar(a As Variant, b As Variant, nabr As Variant) As Boolean
- proverka = folse
+ proverka = false
  For i1 = 3 To 6
     For i = 3 To 6
         If Sheets(2).Cells(i1, i) = 0 Then
