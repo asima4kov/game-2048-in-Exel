@@ -1,0 +1,190 @@
+Public proverka As Boolean
+Public pobeda As Boolean
+Private Sub Worksheet_SelectionChange(ByVal Target As Range)
+Sheets(2).Cells(9, 8).Activate
+Call NewColor(a, b, nabr)
+
+' функция передвижение вправо
+If Target.Address = "$I$9" Then
+Call proverkaVar(a, b, nabr)
+Call NewColor(a, b, nabr)
+    If proverka = True Then
+        For i2 = 1 To 3
+            For i1 = 3 To 6
+                   For i = 3 To 5
+                       If Sheets(2).Cells(i1, i) <> 0 Then
+                           If Sheets(2).Cells(i1, i + 1) = 0 Then
+                               Sheets(2).Cells(i1, i + 1) = Sheets(2).Cells(i1, i)
+                               Sheets(2).Cells(i1, i) = ""
+                           End If
+                           If Sheets(2).Cells(i1, i + 1) = Sheets(2).Cells(i1, i) Then
+                                Sheets(2).Cells(i1, i + 1) = Sheets(2).Cells(i1, i) * 2
+                                Sheets(2).Cells(i1, i) = ""
+                            End If
+                        End If
+                   Next i
+               Next i1
+            Next i2
+          ' функция добавления
+            Call NewNaber(a, b, nabr)
+           Sheets(2).Cells(9, 8).Activate
+    End If
+Call NewColor(a, b, nabr)
+End If
+
+' функция передвижение влево
+If Target.Address = "$G$9" Then
+ Call proverka_Var(a, b, nabr)
+ Call NewColor(a, b, nabr)
+    If proverka = True Then
+         For i2 = 1 To 3
+            For i1 = 3 To 6
+                   For i = 6 To 4 Step -1
+                   a = Sheets(2).Cells(i1, i - 1)
+                       If Sheets(2).Cells(i1, i) <> 0 Then
+                           If Sheets(2).Cells(i1, i - 1) = 0 Then
+                               Sheets(2).Cells(i1, i - 1) = Sheets(2).Cells(i1, i)
+                               Sheets(2).Cells(i1, i) = ""
+                           End If
+                           If Sheets(2).Cells(i1, i - 1) = Sheets(2).Cells(i1, i) Then
+                                Sheets(2).Cells(i1, i - 1) = Sheets(2).Cells(i1, i) * 2
+                                Sheets(2).Cells(i1, i) = ""
+                            End If
+                        End If
+                   Next i
+               Next i1
+               Next i2
+          ' функция добавления
+            Call NewNaber(a, b, nabr)
+           Sheets(2).Cells(9, 8).Activate
+    End If
+Call NewColor(a, b, nabr)
+End If
+
+
+' функция передвижение Ввниз
+If Target.Address = "$H$10" Then
+Call proverkaVar(a, b, nabr)
+Call NewColor(a, b, nabr)
+ 
+    If proverka = True Then
+         For i2 = 1 To 3
+            For i1 = 3 To 5
+                   For i = 3 To 6
+                       If Sheets(2).Cells(i1, i) <> 0 Then
+                           If Sheets(2).Cells(i1 + 1, i) = 0 Then
+                               Sheets(2).Cells(i1 + 1, i) = Sheets(2).Cells(i1, i)
+                               Sheets(2).Cells(i1, i) = ""
+                           End If
+                           If Sheets(2).Cells(i1 + 1, i) = Sheets(2).Cells(i1, i) Then
+                                Sheets(2).Cells(i1 + 1, i) = Sheets(2).Cells(i1, i) * 2
+                                Sheets(2).Cells(i1, i) = ""
+                            End If
+                        End If
+                   Next i
+               Next i1
+            Next i2
+          ' функция добавления
+           Call NewNaber(a, b, nabr)
+           Sheets(2).Cells(9, 8).Activate
+    End If
+Call NewColor(a, b, nabr)
+End If
+
+' функция передвижение Вверх
+If Target.Address = "$H$8" Then
+Call proverkaVar(a, b, nabr)
+Call NewColor(a, b, nabr)
+    If proverka = True Then
+         For i2 = 1 To 3
+            For i1 = 6 To 4 Step -1
+                   For i = 3 To 6
+                       If Sheets(2).Cells(i1, i) <> 0 Then
+                           If Sheets(2).Cells(i1 - 1, i) = 0 Then
+                               Sheets(2).Cells(i1 - 1, i) = Sheets(2).Cells(i1, i)
+                               Sheets(2).Cells(i1, i) = ""
+                           End If
+                           If Sheets(2).Cells(i1 - 1, i) = Sheets(2).Cells(i1, i) Then
+                                Sheets(2).Cells(i1 - 1, i) = Sheets(2).Cells(i1, i) * 2
+                                Sheets(2).Cells(i1, i) = ""
+                            End If
+                        End If
+                   Next i
+               Next i1
+            Next i2
+          ' функция добавления
+            Call NewNaber(a, b, nabr)
+           Sheets(2).Cells(9, 8).Activate
+    End If
+Call NewColor(a, b, nabr)
+End If
+End Sub
+
+Sub NewNaber(a As Variant, b As Variant, nabr As Variant)
+         For i = 1 To 1000
+            a = WorksheetFunction.RandBetween(3, 6)
+            b = WorksheetFunction.RandBetween(3, 6)
+            nabr = Rnd
+            If nabr <= 0.75 Then
+                If Sheets(2).Cells(a, b) = "" Then
+                    Sheets(2).Cells(a, b) = 2
+                    i = 9999
+                End If
+            Else
+                If Sheets(2).Cells(a, b) = "" Then
+                    Sheets(2).Cells(a, b) = 4
+                    i = 9999
+                End If
+            End If
+          Next i
+End Sub
+
+Function proverkaVar(a As Variant, b As Variant, nabr As Variant) As Boolean
+ proverka = folse
+ For i1 = 3 To 6
+    For i = 3 To 6
+        If Sheets(2).Cells(i1, i) = 0 Then
+            proverka = True
+        End If
+        If Sheets(2).Cells(i1, i) = Sheets(2).Cells(i1 + 1, i) Or Sheets(2).Cells(i1, i) = Sheets(2).Cells(i1 - 1, i) Or Sheets(2).Cells(i1, i) = Sheets(2).Cells(i1, i + 1) Or Sheets(2).Cells(i1, i) = Sheets(2).Cells(i1, i - 1) Then
+            proverka = True
+        End If
+              
+    Next i
+ Next i1
+   If pobeda = False Then
+        For i1 = 3 To 6
+           For i = 3 To 6
+               If Sheets(2).Cells(i1, i) = 2048 Then
+                   pobeda = True
+                   MsgBox "Победа"
+               End If
+           Next i
+        Next i1
+   End If
+    If proverka = folse Then
+        MsgBox "Проиграл"
+        Sheets(2).Cells(9, 8).Activate
+    End If
+    
+End Function
+
+Sub NewColor(a As Variant, b As Variant, nabr As Variant)
+    For i1 = 3 To 6
+    For i = 3 To 6
+       Select Case Sheets(2).Cells(i1, i)
+          Case 0: Sheets(2).Cells(i1, i).Interior.Color = RGB(250, 235, 215)
+          Case 2: Sheets(2).Cells(i1, i).Interior.Color = RGB(250, 235, 215)    'AntiqueWhite
+          Case 4: Sheets(2).Cells(i1, i).Interior.Color = RGB(255, 218, 185)     'PeachPuff
+          Case 8: Sheets(2).Cells(i1, i).Interior.Color = RGB(218, 165, 32)      'Goldenrod
+          Case 16: Sheets(2).Cells(i1, i).Interior.Color = RGB(184, 134, 11)     'DarkGoldenrod
+          Case 32: Sheets(2).Cells(i1, i).Interior.Color = RGB(188, 143, 143)    'RosyBrown
+          Case 64: Sheets(2).Cells(i1, i).Interior.Color = RGB(205, 92, 92)     'IndianRed
+          Case 128: Sheets(2).Cells(i1, i).Interior.Color = RGB(160, 82, 45)     'Sienna
+          Case 256: Sheets(2).Cells(i1, i).Interior.Color = RGB(210, 105, 30)    'Chocolate
+          Case 512: Sheets(2).Cells(i1, i).Interior.Color = RGB(178, 34, 34)     'Firebrick
+          Case 1024: Sheets(2).Cells(i1, i).Interior.Color = RGB(255, 140, 0)   'DarkOrange
+          Case 2048: Sheets(2).Cells(i1, i).Interior.Color = RGB(255, 140, 0)
+     End Select
+    Next i
+ Next i1
